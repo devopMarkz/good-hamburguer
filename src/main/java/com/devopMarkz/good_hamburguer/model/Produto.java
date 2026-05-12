@@ -1,6 +1,7 @@
 package com.devopMarkz.good_hamburguer.model;
 
 import com.devopMarkz.good_hamburguer.model.enums.Categoria;
+import com.devopMarkz.good_hamburguer.model.enums.GrupoProduto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,13 +29,21 @@ public class Produto {
     @Column(name = "categoria", nullable = false)
     private Categoria categoria;
 
-    public Produto(String nome, BigDecimal valorUnitario, Categoria categoria) {
+    @Enumerated(EnumType.STRING)
+    @Column(name = "grupo_produto", nullable = false)
+    private GrupoProduto grupoProduto;
+
+    public Produto(String nome, BigDecimal valorUnitario, Categoria categoria, GrupoProduto grupoProduto) {
         if (nome == null || nome.isBlank()) {
             throw new IllegalArgumentException("Nome não pode ser vazio");
         }
 
         if (valorUnitario == null || valorUnitario.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Valor inválido");
+        }
+
+        if (grupoProduto == null) {
+            throw new IllegalArgumentException("Grupo de produto obrigatório");
         }
 
         if (categoria == null) {
@@ -44,6 +53,7 @@ public class Produto {
         this.nome = nome;
         this.valorUnitario = valorUnitario;
         this.categoria = categoria;
+        this.grupoProduto = grupoProduto;
     }
 
     public void alterarPreco(BigDecimal novoValor) {

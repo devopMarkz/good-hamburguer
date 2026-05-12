@@ -17,6 +17,7 @@ public class ItemPedido {
     @EqualsAndHashCode.Include
     private Long id;
 
+    @Column(name = "quantidade", nullable = false)
     private Integer quantidade;
 
     @Column(nullable = false, updatable = false)
@@ -39,7 +40,7 @@ public class ItemPedido {
         }
 
         if (produto == null) {
-            throw new IllegalArgumentException("Produto não pode ser nulo");
+            throw new IllegalArgumentException("Produto não encontrado");
         }
 
         this.quantidade = quantidade;
@@ -63,7 +64,7 @@ public class ItemPedido {
         this.subtotal = calcularSubtotal();
 
         if (this.pedido != null) {
-            this.pedido.atualizarTotal(subtotalAntigo, this.subtotal);
+            this.pedido.atualizarSubtotal(subtotalAntigo, this.subtotal);
         }
     }
 

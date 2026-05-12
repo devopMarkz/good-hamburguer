@@ -1,3 +1,9 @@
 spring:
   application:
     name: good-hamburguer
+
+  profiles:
+    active: dev
+
+  jpa:
+    open-in-view: false
