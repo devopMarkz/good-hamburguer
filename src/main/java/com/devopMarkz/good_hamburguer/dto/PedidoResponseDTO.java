@@ -16,6 +16,8 @@ import java.util.List;
 public class PedidoResponseDTO {
 
     private Long id;
+    private BigDecimal subtotal;
+    private BigDecimal desconto;
     private BigDecimal valorTotal;
     private String dataPedido;
     private List<ItemPedidoResponseDTO> itensPedido = new ArrayList<>();
